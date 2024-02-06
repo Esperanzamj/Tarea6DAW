@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" TYPE="text/css">
+    <title>Formulario</title>
+    <style>
+        
+h1 ,h2{
+    margin-left:32px
+}
+
+form {
+    border: 2px solid grey;
+    border-radius: 6px;
+    padding: 16px;
+    padding-top: 32px;;
+    background-color: rgb(195, 229, 241);
+    margin-top: 16px;
+    margin-left:32px;
+    margin-bottom: 64px;
+}
+
+form>label {
+    padding: 20px;
+    display: inline-block;
+    width: 80px;
+    font-size:18px;
+ 
+}
+
+form>input {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
+    width: 200px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+form>input:focus{
+    background-color: #e6e6e6;
+}
+
+#enviar {
+    margin-left: 90px;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    background: #6495ED;
+    width: 150px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+#enviar:hover{
+    background: #0066FF;
+}
+.mensajes{
+    color: red;
+    font-size: 18px;
+    padding-left: 20px;
+    margin-left: 88px ;
+
+}
+
+.bordeRojo{
+    border: 2px solid red;
+}
+    </style>
+    <script>
+
+        function comprobarUsuario() {
+            var usuario = document.getElementById("usuario").value
+            var regexCaracter = /./;
+            var regexLetras = /^[a-z]+$/;
+            var regexLongitud = /^.{3,12}$/;
+            var enviado = true;
+            document.getElementById("valUsuario").innerHTML = "";
+            document.getElementById("usuario").classList.remove("bordeRojo");
+            
+            if (!regexCaracter.exec(usuario)) {
+                document.getElementById("valUsuario").innerHTML = "El usuario no puede estar vacío";
+                document.getElementById("usuario").classList.add("bordeRojo");
+                enviado = false;
+            }
+
+            if (!regexLetras.exec(usuario)) {
+
+                document.getElementById("valUsuario").innerHTML += "<br> El usuario solo puede tener minúsculas";
+                document.getElementById("usuario").classList.add("bordeRojo");
+                enviado = false;
+            }
+            if (!regexLongitud.exec(usuario)) {
+                document.getElementById("valUsuario").innerHTML += "<br> El usuario debe tener entre 3 y 12 caracteres";
+                document.getElementById("usuario").classList.add("bordeRojo");
+                enviado = false;
+            }
+
+            return enviado;
+
+
+        }
+
+        function comprobarClave() {
+            var key = document.getElementById("clave").value;
+            var regexCaracter = /./;
+            var regexFormato = /^[A-Z][\.,-][a-z0-9]{6}$/;
+            var enviado = true;
+            document.getElementById("valClave").innerHTML = "";
+            document.getElementById("clave").classList.remove("bordeRojo");
+            
+            if (!regexCaracter.exec(key)) {
+                document.getElementById("valClave").innerHTML += "La contraseña no puede estar vacía<br>";
+                document.getElementById("clave").classList.add("bordeRojo");
+                enviado = false;
+            }
+
+            if (!regexFormato.exec(key)) {
+                document.getElementById("valClave").innerHTML += "La contraseña debe estar formada por 1 letra mayúscula, 1 punto, una coma o 1 guion medio, 6 letras minúsculas o 6 números o la combinación de letras y números";
+                document.getElementById("clave").classList.add("bordeRojo");
+                enviado = false;
+            }
+
+
+            return enviado;
+
+
+        }
+        
+        function comprobarUsuarioYClave(){
+            var resulUsuario = comprobarUsuario();
+            var resulClave = comprobarClave();
+            return resulUsuario && resulClave;
+        }
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Validar Formulario</h1>
+        <hr>
+    </header>
+    <main>
+        <h2>Datos de identificación</h2>
+        <form method="POST" id="formulario" onsubmit="return comprobarUsuarioYClave()">
+            <label for="usuario"><b>Usuario</b></label>
+            <input type="text" id="usuario" name="usuario" value=""><br>
+            <div class="mensajes" id="valUsuario"></div>
+            <label for="usuario"><b>Contraseña</b></label>
+            <input type="passwd" id="clave" name="clave" value=""><br>
+            <div class="mensajes" id="valClave"></div>
+            <input type="submit" id="enviar" name="enviar" value="Enviar">
+       
+        
+    </main>
+    <hr>
+    <footer><b>Validación de formulario realizada por:
+            María Esperanza Montero Jaén</b></footer>
+</body>
+
+</html>
