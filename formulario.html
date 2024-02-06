@@ -108,20 +108,20 @@ form>input:focus{
         }
 
         function comprobarClave() {
-            var key = document.getElementById("clave").value;
+            var clave = document.getElementById("clave").value;
             var regexCaracter = /./;
             var regexFormato = /^[A-Z][\.,-][a-z0-9]{6}$/;
             var enviado = true;
             document.getElementById("valClave").innerHTML = "";
             document.getElementById("clave").classList.remove("bordeRojo");
             
-            if (!regexCaracter.exec(key)) {
+            if (!regexCaracter.exec(clave)) {
                 document.getElementById("valClave").innerHTML += "La contraseña no puede estar vacía<br>";
                 document.getElementById("clave").classList.add("bordeRojo");
                 enviado = false;
             }
 
-            if (!regexFormato.exec(key)) {
+            if (!regexFormato.exec(clave)) {
                 document.getElementById("valClave").innerHTML += "La contraseña debe estar formada por 1 letra mayúscula, 1 punto, una coma o 1 guion medio, 6 letras minúsculas o 6 números o la combinación de letras y números";
                 document.getElementById("clave").classList.add("bordeRojo");
                 enviado = false;
@@ -157,7 +157,7 @@ form>input:focus{
             <input type="passwd" id="clave" name="clave" value=""><br>
             <div class="mensajes" id="valClave"></div>
             <input type="submit" id="enviar" name="enviar" value="Enviar">
-       
+        </form>
         
     </main>
     <hr>
